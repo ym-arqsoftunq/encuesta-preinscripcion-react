@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import Alumnos from './Alumnos/Alumnos';
+import Header from './Components/Header';
+import Materia from './Components/Materia';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
         <div className="App">
-            <Alumnos />
+            <Header />
+            <Materia />
         </div>
     );
   }
