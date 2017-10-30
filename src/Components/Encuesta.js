@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/lib/Button';
 import ConjuntoDeMateriasAprobadas from './ConjuntoDeMateriasAprobadas';
 import ConjuntoDeMateriasCursables from './ConjuntoDeMateriasCursables';
 
@@ -21,11 +22,13 @@ class EncuestaForm extends Component {
 
   render() {
         return (
-          <form onSubmit={this.handleSubmit}>
-            <ConjuntoDeMateriasAprobadas materias={this.state.materias_aprobadas} />
-            <ConjuntoDeMateriasCursables materias={this.state.materias_cursables} />
-            <input type="submit" value="Submit" />
-          </form>
+        <form onSubmit={this.handleSubmit} className="form-group">
+          <div className="row">
+                <ConjuntoDeMateriasAprobadas materias={this.state.materias_aprobadas} />
+                <ConjuntoDeMateriasCursables materias={this.state.materias_cursables} />
+         </div>
+         <Button type='Submit' bsStyle="primary" bsSize="large"> Confirmar </Button>
+       </form>
         );
   }
 }

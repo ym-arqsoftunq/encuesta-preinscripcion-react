@@ -9,7 +9,7 @@ class Header extends Component {
 
   render() {
     return (
-        <div id="header">
+        <div id="header" className="col-md-8">
             <img src={this.state.url} alt="Universidad Nacional de Quilmes" className="img-responsive" />
         </div>
        );

@@ -27,9 +27,9 @@ class ConjuntoDeMateriasCursables extends ConjuntoDeMaterias {
 
     render() {
       return (
-        <div id="MateriasCursables">
+        <div id="MateriasCursables" className="col-md-6">
             <hr></hr>
-            <h5>Este es el componente de materias cursables</h5>
+            <h3>Materias por cursar</h3>
             {this.renderMaterias()}
             <hr></hr>
         </div>

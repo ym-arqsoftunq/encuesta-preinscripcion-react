@@ -27,9 +27,9 @@ class ConjuntoDeMateriasAprobadas extends ConjuntoDeMaterias {
 
     render() {
       return (
-        <div id="MateriasAprobadas">
+        <div id="MateriasAprobadas" className="col-md-6">
             <hr></hr>
-            <h5>Este es el componente de materias aprobadas</h5>
+            <h3>Materias aprobadas</h3>
             {this.renderMaterias()}
             <hr></hr>
         </div>

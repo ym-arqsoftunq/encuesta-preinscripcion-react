@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import EncuestaForm from './Components/Encuesta';
+import Alumno from './Components/Alumno';
 import './App.css';
 import axios from 'axios';
 
@@ -27,9 +28,14 @@ class App extends Component {
     //Si ya tengo los datos, genero los componentes
     if (this.state.oferta) {
         return (
-            <div className="App">
-                <Header />
-                <EncuestaForm oferta={this.state.oferta} />
+            <div className="container">
+                <div className="row">
+                    <Header />
+                    <Alumno datos={this.state.oferta.alumno}/>
+                </div>
+                <div className="row">
+                    <EncuestaForm oferta={this.state.oferta} />
+                </div>
             </div>
         );
     }

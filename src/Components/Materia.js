@@ -11,7 +11,7 @@ class Materia extends Component {
       return (
           <div>
           <h5>{this.state.nombre}</h5>
-          <select id={this.state.id} key={this.state.id}>
+          <select id={this.state.id} key={this.state.id} className="form-control">
       {this.state.comisiones.map(
           function(comision, i){
               return <option id={comision.id} value={comision.id} key={i}>{comision.descripcion}</option>;
