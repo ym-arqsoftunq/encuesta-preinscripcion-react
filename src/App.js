@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './Components/Header';
 import EncuestaForm from './Components/Encuesta';
 import Alumno from './Components/Alumno';
-import Cargando from './Components/Cargando';
+import PantallaCargando from './Components/PantallaCargando';
 import './App.css';
 import axios from 'axios';
 
@@ -43,7 +43,7 @@ class App extends Component {
     }
     else{
         //Mientras espero que llegue la oferta, muestro lo que esta aca
-        return (<Cargando />)
+        return (<PantallaCargando />)
     }
   }
 }
