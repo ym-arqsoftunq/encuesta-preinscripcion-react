@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Components/Header';
 import EncuestaForm from './Components/Encuesta';
 import Alumno from './Components/Alumno';
+import Cargando from './Components/Cargando';
 import './App.css';
 import axios from 'axios';
 
@@ -16,6 +17,7 @@ class App extends Component {
         var self = this;
         axios.get('https://encuesta-preinscripcion-bknd.herokuapp.com/oferta/15')
           .then(res => {
+            console.log(res.data)
             self.setState({ oferta: res.data });
         });
     }
@@ -41,7 +43,7 @@ class App extends Component {
     }
     else{
         //Mientras espero que llegue la oferta, muestro lo que esta aca
-        return (<h1>Loading...</h1>)
+        return (<Cargando />)
     }
   }
 }
