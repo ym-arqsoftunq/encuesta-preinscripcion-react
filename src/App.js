@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
-import EncuestaForm from './Components/Encuesta';
+import Encuesta from './Components/Encuesta';
 import Alumno from './Components/Alumno';
 import PantallaCargando from './Components/PantallaCargando';
 import './App.css';
@@ -15,9 +15,13 @@ class App extends Component {
 
     traerOferta() {
         var self = this;
-        axios.get('https://encuesta-preinscripcion-bknd.herokuapp.com/oferta/15')
+        //local flask 
+        //let url = 'http://localhost:5000/oferta/15';
+        // heroku
+        let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/oferta/15';
+        axios.get(url)
           .then(res => {
-            console.log(res.data)
+            //console.log(res.data)
             self.setState({ oferta: res.data });
         });
     }
@@ -36,7 +40,7 @@ class App extends Component {
                     <Alumno datos={this.state.oferta.alumno}/>
                 </div>
                 <div className="row">
-                    <EncuestaForm oferta={this.state.oferta} />
+                    <Encuesta oferta={this.state.oferta} />
                 </div>
             </div>
         );
