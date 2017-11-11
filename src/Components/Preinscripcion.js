@@ -31,8 +31,8 @@ class Preinscripcion extends Component {
             {this.state.materias.map(
                 function(materia, i){
                     return (
-                        <li key={i}>{materia.nombre} {materia.comision_seleccionada.descripcion}<Button bsStyle="danger" 
-                        onClick={function(){
+                        <li key={i}>{materia.nombre} {materia.comision_seleccionada.descripcion}
+                            <Button bsStyle="link" bsSize="xsmall" onClick={function(){
                             self.props.des_preinscribir_prop(materia);
                         }}>X</Button></li>
                     );

@@ -31,7 +31,7 @@ class MateriasAprobadas extends Component {
             {this.state.materias.map(
                 function(materia, i){
                     return (
-                        <li key={i}>{materia.nombre} <Button bsStyle="danger" 
+                        <li key={i}>{materia.nombre} <Button bsStyle="link" bsSize="xsmall"
                         onClick={function(){
                             self.props.desmarcar_aprobada_prop(materia);
                         }}>X</Button></li>
