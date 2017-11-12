@@ -42,10 +42,10 @@ class App extends Component {
         this.setState({usuario: response.profileObj.name});
         //alert(response.profileObj.name);
         // local flask
-        let url = 'http://localhost:5000/login';
+        //let url = 'http://localhost:5000/login';
 
         // Heroku
-        //let url = 'http://localhost:5000/login'
+        let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/login'
 
         let self = this;
         axios.post(url,{ token: response.tokenId }
@@ -63,7 +63,9 @@ class App extends Component {
         }
         return (<GoogleLogin
                     //clientId de react-google-login
-                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                    //clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                    //clientId de Nestor
+                    clientId="24020407875-f97tlhpiqr92q6c5jc4o19jdelrc2bhg.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={this.onSuccessResponseGoogleCallback}
                     onFailure={responseGoogle}/>);
