@@ -46,7 +46,9 @@ class App extends Component {
         }
         return (<GoogleLogin
                     //clientId de react-google-login
-                    clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                    //clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+                    //clientId de Nestor
+                    clientId="24020407875-f97tlhpiqr92q6c5jc4o19jdelrc2bhg.apps.googleusercontent.com"
                     buttonText="Login"
                     onSuccess={this.onSuccessResponseGoogleCallback}
                     onFailure={responseGoogle}/>);
