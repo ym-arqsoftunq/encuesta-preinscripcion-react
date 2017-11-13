@@ -10,7 +10,6 @@ class Encuesta extends Component {
   constructor(props) {
     super(props);
     let estado = props.oferta;
-    estado.materias_preinscripcion = [];
     this.state = estado;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,22 +26,22 @@ class Encuesta extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    //local flask 
-    //let url = 'http://localhost:5000/preinscribir';
+    //local flask
+    //let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/preinscribir';
     // heroku
     let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/preinscribir';
     axios.post(url, {
       alumno: this.state.alumno,
       materias_aprobadas: this.state.materias_aprobadas,
-      materias_preinscripcion: this.state.materias_preinscripcion
+      materias_preinscripcion: this.state.materias_preinscripcion,
+      materias_cursables: this.state.materias_cursables,
+      oferta: this.state.oferta
     })
       .then(function (response) {
-        console.log(response);
         alert('Preincripcion exitosa');
       })
       .catch(function (error) {
         console.log(error);
-        alert('Error en la preincripcion');
       });
   }
 
@@ -81,7 +80,7 @@ class Encuesta extends Component {
   }
 
   preinscribir(materia,comision)
-  {    
+  {
     // quito la materia de materias cursables (Oferta)
     let materias_cursables = this.state.materias_cursables.filter(function(m){
       return m.id !== materia.id;

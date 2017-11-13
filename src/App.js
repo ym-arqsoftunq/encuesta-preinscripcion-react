@@ -18,23 +18,6 @@ class App extends Component {
         this.onSuccessResponseGoogleCallback = this.onSuccessResponseGoogleCallback.bind(this);
     }
 
-    traerOferta() {
-        var self = this;
-        //local flask 
-        //let url = 'http://localhost:5000/oferta/15';
-        // heroku
-        let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/oferta/15';
-        axios.get(url)
-          .then(res => {
-            //console.log(res.data)
-            self.setState({ oferta: res.data });
-        });
-    }
-
-    componentWillMount() {
-        //this.traerOferta();
-    }
-
     onSuccessResponseGoogleCallback(response)
     {
         //console.log(response);
@@ -42,10 +25,10 @@ class App extends Component {
         this.setState({usuario: response.profileObj.name});
         //alert(response.profileObj.name);
         // local flask
-        let url = 'http://localhost:5000/login';
+        let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/login';
 
         // Heroku
-        //let url = 'http://localhost:5000/login'
+        //let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/login'
 
         let self = this;
         axios.post(url,{ token: response.tokenId }
@@ -77,7 +60,7 @@ class App extends Component {
             <div className="container">
                 <div className="row">
                     <Header />
-                    <Alumno datos={this.state.oferta.alumno}/>
+                    <Alumno datos={this.state.usuario}/>
                 </div>
                 <div className="row">
                     <Encuesta oferta={this.state.oferta} />

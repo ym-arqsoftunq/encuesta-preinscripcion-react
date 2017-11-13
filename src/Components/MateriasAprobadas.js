@@ -12,7 +12,7 @@ class MateriasAprobadas extends Component {
     componentWillMount()
     {
         this.setState({
-            materias: this.props.materias
+            materias: this.props.materias || []
         });
     }
 
@@ -57,4 +57,3 @@ class MateriasAprobadas extends Component {
 }
 
 export default MateriasAprobadas;
-

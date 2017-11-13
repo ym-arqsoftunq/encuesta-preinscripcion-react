@@ -60,6 +60,7 @@ class Oferta extends Component {
                 cuatrimestres.map(function(c){
                     return (
                             <Cuatrimestre
+                                key={c.numero}
                                 numero={c.numero} materias={c.materias}
                                 marcar_aprobada_prop={self.props.marcar_aprobada_prop}
                                 preinscribir_prop={self.props.preinscribir_prop}/>
@@ -74,4 +75,3 @@ class Oferta extends Component {
 }
 
 export default Oferta;
-

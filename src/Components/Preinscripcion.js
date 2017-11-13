@@ -26,7 +26,7 @@ class Preinscripcion extends Component {
     renderMaterias() {
         let self=this;
         return (
-            <div>
+            <div id="Preinscripcion">
             <ul>
             {this.state.materias.map(
                 function(materia, i){
@@ -57,4 +57,3 @@ class Preinscripcion extends Component {
 }
 
 export default Preinscripcion;
-
