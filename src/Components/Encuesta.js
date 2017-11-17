@@ -11,6 +11,7 @@ class Encuesta extends Component {
     super(props);
     let estado = props.oferta;
     this.state = estado;
+    this.state.backend_url= props.backend_url;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.marcar_aprobada = this.marcar_aprobada.bind(this);
@@ -25,11 +26,7 @@ class Encuesta extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    //local flask
-    //let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/preinscribir';
-    // heroku
-    let url = 'https://encuesta-preinscripcion-bknd.herokuapp.com/preinscribir';
+    let url = this.state.backend_url + 'preinscribir';
     axios.post(url, {
       alumno: this.state.alumno,
       materias_aprobadas: this.state.materias_aprobadas,
@@ -41,6 +38,7 @@ class Encuesta extends Component {
         alert('Preincripcion exitosa');
       })
       .catch(function (error) {
+        alert('Preincripcion fallida');
         console.log(error);
       });
   }
