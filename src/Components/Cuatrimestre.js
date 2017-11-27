@@ -36,7 +36,7 @@ class Cuatrimestre extends Component {
         }else{
             // llama a marcar_aprobada_prop
             eventKey.accion(eventKey.materia);
-        }        
+        }
     }
 
     renderMaterias() {
@@ -51,7 +51,7 @@ class Cuatrimestre extends Component {
                               <MenuItem eventKey={{materia:materia,accion:self.props.marcar_aprobada_prop}}>Aprobada</MenuItem>
                               <MenuItem divider />
                               {materia.comisiones.map(function(comision,ic){
-                                return (<MenuItem eventKey={
+                                return (<MenuItem key={ic} eventKey={
                                     {
                                         materia: materia,
                                         comision: comision,
@@ -68,14 +68,13 @@ class Cuatrimestre extends Component {
     }
 
     render() {
-      return (        
+      return (
             <Panel collapsible header={'Cuatrimestre ' + this.state.numero}>
             		{this.renderMaterias()}
-            </Panel>        
+            </Panel>
       );
     }
 
 }
 
 export default Cuatrimestre;
-
