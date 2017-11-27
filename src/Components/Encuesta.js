@@ -35,10 +35,10 @@ class Encuesta extends Component {
       oferta: this.state.oferta
     })
       .then(function (response) {
-        alert('Preincripcion exitosa');
+        alert('Preinscripcion exitosa');
       })
       .catch(function (error) {
-        alert('Preincripcion fallida');
+        alert('Preinscripcion fallida');
         console.log(error);
       });
   }
@@ -121,7 +121,7 @@ class Encuesta extends Component {
                 preinscribir_prop={this.preinscribir}/>
                 <Preinscripcion materias={this.state.materias_preinscripcion} des_preinscribir_prop={this.des_preinscribir}/>
          </div>
-         <Button type='Submit' bsStyle="primary" bsSize="large"> Confirmar </Button>
+         <Button type='submit' bsStyle="primary" bsSize="large"> Confirmar </Button>
        </form>
         );
   }
