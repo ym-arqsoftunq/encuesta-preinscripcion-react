@@ -7,6 +7,7 @@ import './App.css';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import { Grid,Row, Panel, Form,FormGroup, Col,FormControl, Button } from 'react-bootstrap';
 
 class App extends Component {
 
@@ -14,7 +15,9 @@ class App extends Component {
         super(props);
         this.state = {
             usuario: null,
-            oferta: null
+            oferta: null,
+            email: '',
+            password: ''
         };
         this.onSuccessResponseGoogleLoginCallback = this.onSuccessResponseGoogleLoginCallback.bind(this);
         this.onSuccessResponseFacebookLoginCallback = this.onSuccessResponseFacebookLoginCallback.bind(this);
@@ -25,6 +28,8 @@ class App extends Component {
             this.state.backend_url = 'http://localhost:8000/';
             this.state.facebookLoginAppId = "900337603475842"
         }
+        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+        this.handleUserInput = this.handleUserInput.bind(this);
     }
 
     onSuccessResponseGoogleLoginCallback(response)
@@ -55,6 +60,35 @@ class App extends Component {
                             });
     }
 
+    handleLoginSubmit()
+    {
+        console.log('handleLoginSubmit');
+        //this.setState({usuario: response.name});
+        let url = this.state.backend_url + 'login';
+        //let self = this;
+        axios.post(url,{ email: this.state.email, password: this.state.password}
+                            ).then(function(response){                          
+                                alert('then');
+                            //console.log('hola');      
+                                // self.setState({
+                                //     oferta: response.data,
+                                //     usuario: self.state.email
+                                //  });
+
+                                console.log('WACHINNNNNNNNNNNNNNNNN');
+                                //console.log('email ' + self.state.email);
+                            }).catch(function(error){
+                                alert('Error al loguearse. Ver log de consola.');
+                                console.log(error);
+                            });
+    }
+
+    handleUserInput(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
   render() {
     if(this.state.usuario === null){
         const responseGoogleLoginOnFailure = (response) => {
@@ -64,18 +98,62 @@ class App extends Component {
           console.log(response);
         };
         return (<div>
-                <GoogleLogin
-                    //clientId de Nestor
-                    clientId="24020407875-f97tlhpiqr92q6c5jc4o19jdelrc2bhg.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={this.onSuccessResponseGoogleLoginCallback}
-                    onFailure={responseGoogleLoginOnFailure}/>
-                <FacebookLogin
-                    appId={this.state.facebookLoginAppId}
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    callback={this.onSuccessResponseFacebookLoginCallback}
-                    onFailure={responseFacebookLoginOnFailure}/>
+                <Header />
+                <Grid>
+                <Row>
+                <Col xs={6} xsOffset={3}>
+                <Panel header="Ingresar">
+                    <Form horizontal onSubmit={this.handleLoginSubmit}>
+                        <FormGroup controlId="formHorizontalEmail">
+                          <Col sm={10}>
+                            <FormControl type="email" placeholder="Email" value={this.state.email}
+                            onChange={this.handleUserInput} name="email"/>
+                          </Col>
+                        </FormGroup>
+
+                        <FormGroup controlId="formHorizontalPassword">
+                          <Col sm={10}>
+                            <FormControl type="password" placeholder="Password"  value={this.state.password}
+                            onChange={this.handleUserInput} name="password"/>
+                          </Col>
+                        </FormGroup>
+
+                        <FormGroup>
+                          <Col sm={10}>
+                            <Button type="submit">
+                              Ingresar
+                            </Button>
+                          </Col>
+                        </FormGroup>
+                    </Form>
+                    <Panel header="O ingresa con">
+                        <Grid>
+                        <Row>
+                        <Col md={3}>
+                            <GoogleLogin
+                                //clientId de Nestor
+                                clientId="24020407875-f97tlhpiqr92q6c5jc4o19jdelrc2bhg.apps.googleusercontent.com"
+                                buttonText="Google"
+                                onSuccess={this.onSuccessResponseGoogleLoginCallback}
+                                onFailure={responseGoogleLoginOnFailure}/>
+                        </Col>
+                        <Col md={3}>
+                            <FacebookLogin
+                                appId={this.state.facebookLoginAppId}
+                                autoLoad={false}
+                                fields="name,email,picture"
+                                callback={this.onSuccessResponseFacebookLoginCallback}
+                                onFailure={responseFacebookLoginOnFailure}
+                                textButton="Facebook"
+                                size="small"/>
+                        </Col>
+                        </Row>
+                        </Grid>
+                    </Panel>    
+                </Panel>
+                </Col>
+                </Row>
+                </Grid>
             </div>);
     }
 

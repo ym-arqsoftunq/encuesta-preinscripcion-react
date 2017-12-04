@@ -11,6 +11,7 @@ class Header extends Component {
     return (
         <div id="header" className="col-md-8">
             <img src={this.state.url} alt="Universidad Nacional de Quilmes" className="img-responsive" />
+            Encuesta preinscripcion
         </div>
        );
 
