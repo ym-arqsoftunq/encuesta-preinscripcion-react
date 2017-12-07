@@ -17,7 +17,9 @@ class App extends Component {
             usuario: null,
             oferta: null,
             email: '',
-            password: ''
+            password: '',
+            emailValidationState: null,
+            passwordValidationState: null
         };
         this.onSuccessResponseGoogleLoginCallback = this.onSuccessResponseGoogleLoginCallback.bind(this);
         this.onSuccessResponseFacebookLoginCallback = this.onSuccessResponseFacebookLoginCallback.bind(this);
@@ -60,23 +62,25 @@ class App extends Component {
                             });
     }
 
-    handleLoginSubmit()
+    handleLoginSubmit(event)
     {
-        console.log('handleLoginSubmit');
-        //this.setState({usuario: response.name});
+        event.preventDefault();
+        if(!this.state.email){
+            this.setState({emailValidationState: 'error'});
+            return;
+        }
+        if(!this.state.password){
+            this.setState({passwordValidationState: 'error'});
+            return;
+        }
         let url = this.state.backend_url + 'login';
-        //let self = this;
+        let self = this;
         axios.post(url,{ email: this.state.email, password: this.state.password}
-                            ).then(function(response){                          
-                                alert('then');
-                            //console.log('hola');      
-                                // self.setState({
-                                //     oferta: response.data,
-                                //     usuario: self.state.email
-                                //  });
-
-                                console.log('WACHINNNNNNNNNNNNNNNNN');
-                                //console.log('email ' + self.state.email);
+                            ).then(function(response){
+                                self.setState({
+                                    oferta: response.data,
+                                    usuario: self.state.email
+                                });
                             }).catch(function(error){
                                 alert('Error al loguearse. Ver log de consola.');
                                 console.log(error);
@@ -104,14 +108,14 @@ class App extends Component {
                 <Col xs={6} xsOffset={3}>
                 <Panel header="Ingresar">
                     <Form horizontal onSubmit={this.handleLoginSubmit}>
-                        <FormGroup controlId="formHorizontalEmail">
+                        <FormGroup controlId="formHorizontalEmail" validationState={this.state.emailValidationState}>
                           <Col sm={10}>
                             <FormControl type="email" placeholder="Email" value={this.state.email}
                             onChange={this.handleUserInput} name="email"/>
                           </Col>
                         </FormGroup>
 
-                        <FormGroup controlId="formHorizontalPassword">
+                        <FormGroup controlId="formHorizontalPassword" validationState={this.state.passwordValidationState}>
                           <Col sm={10}>
                             <FormControl type="password" placeholder="Password"  value={this.state.password}
                             onChange={this.handleUserInput} name="password"/>

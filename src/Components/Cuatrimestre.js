@@ -39,6 +39,13 @@ class Cuatrimestre extends Component {
         }
     }
 
+    quisieraCursar(materia)
+    {
+        // TODO: AGREGAR AL JSON Q SE RETORNA ESTA INFORMACION
+        // Y MOSTRAR DE ALGUNA FORMA EN LA PANTALLA
+        alert('Quisiera cursar ' + materia.nombre);
+    }
+
     renderMaterias() {
         let self=this;
         return (
@@ -59,6 +66,7 @@ class Cuatrimestre extends Component {
                                     }
                                 }>Preinscribir C{comision.id} {comision.descripcion}</MenuItem>);
                               })}
+                              <MenuItem eventKey={{materia:materia,accion:self.quisieraCursar}}>Quisiera cursar pero no puedo</MenuItem>
                             </DropdownButton>
                     );
                 })
