@@ -4,6 +4,7 @@ import MateriasAprobadas from './MateriasAprobadas';
 import Oferta from './Oferta';
 import Preinscripcion from './Preinscripcion';
 import axios from 'axios';
+import Entorno from '../Entorno';
 
 class Encuesta extends Component {
 
@@ -11,7 +12,6 @@ class Encuesta extends Component {
     super(props);
     let estado = props.oferta;
     this.state = estado;
-    this.state.backend_url= props.backend_url;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.marcar_aprobada = this.marcar_aprobada.bind(this);
@@ -26,7 +26,7 @@ class Encuesta extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let url = this.state.backend_url + 'preinscribir';
+    let url = Entorno.getBackendUrl() + 'preinscribir';
     axios.post(url, {
       alumno: this.state.alumno,
       materias_aprobadas: this.state.materias_aprobadas,
