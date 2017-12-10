@@ -63,7 +63,8 @@ class Oferta extends Component {
                                 key={c.numero}
                                 numero={c.numero} materias={c.materias}
                                 marcar_aprobada_prop={self.props.marcar_aprobada_prop}
-                                preinscribir_prop={self.props.preinscribir_prop}/>
+                                preinscribir_prop={self.props.preinscribir_prop}
+                                marcar_cursaria = {self.props.marcar_cursaria}/>
                             );
                 })
             }

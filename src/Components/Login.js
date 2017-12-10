@@ -66,7 +66,12 @@ class Login extends Component {
         let self = this;
         axios.post(url,{ email: this.state.email, password: this.state.password}
                             ).then(function(response){
-                                self.props.login(self.state.email,response.data);
+                                if(response.data.success){
+                                    self.props.login(self.state.email,response.data.rol);
+                                }else{
+                                    alert('Error al loguearse en el backend');
+                                }
+                                
                             }).catch(function(error){
                                 alert('Error al loguearse. Ver log de consola.');
                                 console.log(error);

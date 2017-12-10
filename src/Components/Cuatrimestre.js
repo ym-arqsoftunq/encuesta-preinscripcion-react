@@ -34,16 +34,9 @@ class Cuatrimestre extends Component {
             // llama a preinscribir_prop
             eventKey.accion(eventKey.materia,eventKey.comision);
         }else{
-            // llama a marcar_aprobada_prop
+            // llama a marcar_aprobada_prop o marcar_cursaria
             eventKey.accion(eventKey.materia);
         }
-    }
-
-    quisieraCursar(materia)
-    {
-        // TODO: AGREGAR AL JSON Q SE RETORNA ESTA INFORMACION
-        // Y MOSTRAR DE ALGUNA FORMA EN LA PANTALLA
-        alert('Quisiera cursar ' + materia.nombre);
     }
 
     renderMaterias() {
@@ -66,7 +59,7 @@ class Cuatrimestre extends Component {
                                     }
                                 }>Preinscribir C{comision.id} {comision.descripcion}</MenuItem>);
                               })}
-                              <MenuItem eventKey={{materia:materia,accion:self.quisieraCursar}}>Quisiera cursar pero no puedo</MenuItem>
+                              <MenuItem eventKey={{materia:materia,accion:self.props.marcar_cursaria}}>Quisiera cursar pero no puedo</MenuItem>
                             </DropdownButton>
                     );
                 })

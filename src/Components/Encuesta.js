@@ -12,12 +12,15 @@ class Encuesta extends Component {
     super(props);
     let estado = props.oferta;
     this.state = estado;
+    this.state.materias_cursaria = [];
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.marcar_aprobada = this.marcar_aprobada.bind(this);
     this.desmarcar_aprobada = this.desmarcar_aprobada.bind(this);
     this.preinscribir = this.preinscribir.bind(this);
     this.des_preinscribir = this.des_preinscribir.bind(this);
+    this.marcar_cursaria = this.marcar_cursaria.bind(this);
+    this.desmarcar_cursaria = this.desmarcar_cursaria.bind(this);
   }
 
   handleChange(event) {
@@ -31,6 +34,7 @@ class Encuesta extends Component {
       alumno: this.state.alumno,
       materias_aprobadas: this.state.materias_aprobadas,
       materias_preinscripcion: this.state.materias_preinscripcion,
+      materias_cursaria: this.state.materias_cursaria,
       materias_cursables: this.state.materias_cursables,
       oferta: this.state.oferta
     })
@@ -112,14 +116,54 @@ class Encuesta extends Component {
     });
   }
 
+  marcar_cursaria(materia)
+  {
+    // quito la materia de materias cursables (Oferta)
+    let materias_cursables = this.state.materias_cursables.filter(function(m){
+      return m.id !== materia.id;
+    });
+
+    // agrego la materia a materias que cursaria pero no puedo
+    let materias_cursaria = this.state.materias_cursaria;
+    materias_cursaria.push(materia);
+
+    this.setState({
+      materias_cursables: materias_cursables,
+      materias_cursaria: materias_cursaria
+    });
+  }
+
+  desmarcar_cursaria(materia)
+  {
+    // quito la materia de materias que quisiera cursar pero no puedo
+    let materias_cursaria = this.state.materias_cursaria.filter(function(m){
+      return m.id !== materia.id;
+    });
+
+    // agrego la materia a materias cursables
+    let materias_cursables = this.state.materias_cursables;
+    materias_cursables.push(materia);
+
+    this.setState({
+      materias_cursables: materias_cursables,
+      materias_cursaria: materias_cursaria
+    });
+  }
+
   render() {
         return (
         <form onSubmit={this.handleSubmit} className="form-group">
           <div className="row">
-                <MateriasAprobadas materias={this.state.materias_aprobadas} desmarcar_aprobada_prop={this.desmarcar_aprobada}/>
-                <Oferta materias={this.state.materias_cursables} marcar_aprobada_prop={this.marcar_aprobada}
-                preinscribir_prop={this.preinscribir}/>
-                <Preinscripcion materias={this.state.materias_preinscripcion} des_preinscribir_prop={this.des_preinscribir}/>
+                <MateriasAprobadas  materias={this.state.materias_aprobadas}
+                                    desmarcar_aprobada_prop={this.desmarcar_aprobada}/>
+                <Oferta materias={this.state.materias_cursables}
+                        marcar_aprobada_prop={this.marcar_aprobada}
+                        preinscribir_prop={this.preinscribir}
+                        marcar_cursaria = {this.marcar_cursaria}/>
+                <Preinscripcion materias = {this.state.materias_preinscripcion}
+                                materias_cursaria = {this.state.materias_cursaria}
+                                des_preinscribir_prop = {this.des_preinscribir}
+                                desmarcar_cursaria = {this.desmarcar_cursaria}/>
          </div>
          <Button type='submit' bsStyle="primary" bsSize="large"> Confirmar </Button>
        </form>

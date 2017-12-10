@@ -1,5 +1,5 @@
 // para deploy poner en true
-const ES_PRODUCCION = false;
+const ES_PRODUCCION = true;
 
 class Entorno
 {
@@ -8,7 +8,11 @@ class Entorno
 		if(ES_PRODUCCION){
 			return 'https://encuesta-preinscripcion-bknd.herokuapp.com/';
 		}else{
-			return 'http://localhost:8000/';
+			// Levantando el servidor con $ gunicorn --pythonpath core app:app
+			// el puerto es 8000
+			// con $ FLASK_APP=core/app.py flask run
+			// el puerto es 5000
+			return 'http://localhost:5000/';
 		}
 	}
 
