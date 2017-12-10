@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TablaResultados from './TablaResultados';
 
 class VistaDirector extends Component {
 
@@ -7,7 +8,13 @@ class VistaDirector extends Component {
   }
 
   render() {
-        return <h1>TODO: VISTA DEL DIRECTOR</h1>
+      return (
+          <div className="container">
+              <div className="row">
+                  <TablaResultados/>
+              </div>
+          </div>
+      );
   }
 }
 

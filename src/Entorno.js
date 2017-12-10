@@ -1,5 +1,5 @@
 // para deploy poner en true
-const ES_PRODUCCION = true;
+const ES_PRODUCCION = false;
 
 class Entorno
 {

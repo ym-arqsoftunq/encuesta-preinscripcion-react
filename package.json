@@ -13,7 +13,8 @@
     "react-facebook-login": "^3.7.0",
     "react-google-login": "^3.0.2",
     "react-scripts": "^1.0.17",
-    "react-select-multiple": "0.0.5"
+    "react-select-multiple": "0.0.5",
+    "react-table": "^6.7.4"
   },
   "scripts": {
     "start": "react-scripts start",
