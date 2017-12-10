@@ -52,8 +52,7 @@ class App extends Component {
 
     getInfoDirector()
     {
-        //TODO: de donde saco el id de la encuesta? Creo q deberia traer la activa q siempre deberia ser una
-        let url = Entorno.getBackendUrl() + 'resultados/12';
+        let url = Entorno.getBackendUrl() + 'resultados';
         let self = this;
         axios.get(url).then(function(response){
             self.setState({info_director: response.data});
