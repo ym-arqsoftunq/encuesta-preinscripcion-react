@@ -16,7 +16,7 @@ class App extends Component {
         this.state = {
             email: null,
             rol: null,
-            oferta: null,
+            encuesta_alumno: null,
             info_director: null
         };
         this.login = this.login.bind(this);
@@ -43,7 +43,7 @@ class App extends Component {
         let url = Entorno.getBackendUrl() + 'oferta/' + this.state.email.substring(0,this.state.email.indexOf('@'));
         let self = this;
         axios.get(url).then(function(response){
-            self.setState({oferta: response.data});
+            self.setState({encuesta_alumno: response.data});
         }).catch(function(error){
             alert('Error al recuperar encuesta del alumno ' + this.state.email);
             console.log(error);
@@ -70,7 +70,7 @@ class App extends Component {
     let pantalla;
     switch(this.state.rol) {
         case 'alumno':
-            pantalla = <Encuesta oferta={this.state.oferta}/>
+            pantalla = <Encuesta datos={this.state.encuesta_alumno}/>
             break;
         case 'director':
             pantalla = <VistaDirector datos={this.state.info_director}/>
@@ -80,7 +80,7 @@ class App extends Component {
     }
 
     //Si ya tengo los datos, genero los componentes
-    if (this.state.oferta || this.state.info_director) {
+    if (this.state.encuesta_alumno || this.state.info_director) {
         return (
             <div className="container">
                 <div className="row">

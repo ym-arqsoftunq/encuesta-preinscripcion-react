@@ -10,9 +10,14 @@ class Encuesta extends Component {
 
   constructor(props) {
     super(props);
-    let estado = props.oferta;
-    this.state = estado;
-    this.state.materias_cursaria = [];
+    this.state = {
+      alumno: props.datos.alumno,
+      materias_cursables: props.datos.materias_cursables,
+      materias_aprobadas: props.datos.materias_aprobadas,
+      oferta: props.datos.oferta,
+      materias_cursaria: props.datos.materias_cursaria,
+      materias_preinscripcion: props.datos.materias_preinscripcion
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.marcar_aprobada = this.marcar_aprobada.bind(this);
