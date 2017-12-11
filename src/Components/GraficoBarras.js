@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {BarChart, Bar, XAxis, Tooltip} from 'recharts';
 
-
-
-
 class GraficoBarras extends Component {
 
   constructor(props) {
