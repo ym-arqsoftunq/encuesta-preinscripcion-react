@@ -25,12 +25,16 @@ class Login extends Component {
 
     onSuccessResponseGoogleLoginCallback(response)
     {
-        let usuario = response.profileObj.name;
+        let email = response.profileObj.email;
         let url = Entorno.getBackendUrl() + 'google-login';
         let self = this;
         axios.post(url,{ token: response.tokenId }
-                            ).then(function(response){                                
-                                self.props.login(usuario,response.data);
+                            ).then(function(response){
+                                if(response.data.success){
+                                    self.props.login(email,response.data.rol);
+                                }else{
+                                    alert('Error al loguearse en el backend con Google');
+                                }
                             }).catch(function(error){
                                 alert('Error al loguearse con Google. Ver log de consola.');
                                 console.log(error);
@@ -39,12 +43,16 @@ class Login extends Component {
 
     onSuccessResponseFacebookLoginCallback(response)
     {
-        let usuario = response.name;
+        let email = response.email;
         let url = Entorno.getBackendUrl() + 'facebook-login';
         let self = this;
         axios.post(url,{ token: response.accessToken, email: response.email}
                             ).then(function(response){
-                                self.props.login(usuario,response.data);
+                                if(response.data.success){
+                                    self.props.login(email,response.data.rol);
+                                }else{
+                                    alert('Error al loguearse en el backend con Facebook');
+                                }
                             }).catch(function(error){
                                 alert('Error al loguearse con Facebook. Ver log de consola.');
                                 console.log(error);
@@ -71,7 +79,6 @@ class Login extends Component {
                                 }else{
                                     alert('Error al loguearse en el backend');
                                 }
-                                
                             }).catch(function(error){
                                 alert('Error al loguearse. Ver log de consola.');
                                 console.log(error);
