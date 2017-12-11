@@ -88,7 +88,8 @@ class TablaResultados extends Component {
       let fila = {
         materia: materia.nombre,
         cursarian: materia.cursarian,
-        aprobados: materia.aprobados
+        aprobados: materia.aprobados,
+        problema_de_cupo: materia.problema_de_cupo
       };
       let comisiones = [];
       materia.resultados.forEach(function(comision){
@@ -126,18 +127,42 @@ class TablaResultados extends Component {
       <div>
         <ReactTable
           data={data}
+          filterable={true}
           columns={[
                 {
                   Header: "Materia",
-                  accessor: "materia"
+                  accessor: "materia",
+                  filterMethod: (filter, row) =>
+                    row[filter.id].includes(filter.value)
+                },
+                {
+                  Header: "¿Problema de cupo?",
+                  accessor: "problema_de_cupo",
+                  filterable: false,
+                  Cell: row => (
+                      <span>
+                        <span style={{
+                          color: row.value === true ? '#ff2e00'
+                            : '#57d500',
+                          transition: 'all .3s ease'
+                        }}>
+                          &#x25cf;
+                        </span> {
+                          row.value === true ? 'Si'
+                          : `No`
+                        }
+                      </span>
+                    )
                 },
                 {
                   Header: "Quieren cursar pero no pueden",
-                  accessor: "cursarian"
+                  accessor: "cursarian",
+                  filterable: false
                 },
                 {
                   Header: "Ya aprobaron",
-                  accessor: "aprobados"
+                  accessor: "aprobados",
+                  filterable: false
                 }
           ]}
           defaultPageSize={10}

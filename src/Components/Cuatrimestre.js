@@ -46,6 +46,7 @@ class Cuatrimestre extends Component {
             {self.state.materias.map(
                 function(materia, i){
                     return (
+                        <div>
                         <DropdownButton bsStyle="primary" title={materia.nombre} key={i} id={`dropdown-basic-${i}`}
                         onSelect={self.handleSelect}>
                               <MenuItem eventKey={{materia:materia,accion:self.props.marcar_aprobada_prop}}>Aprobada</MenuItem>
@@ -61,6 +62,9 @@ class Cuatrimestre extends Component {
                               })}
                               <MenuItem eventKey={{materia:materia,accion:self.props.marcar_cursaria}}>Quisiera cursar pero no puedo</MenuItem>
                             </DropdownButton>
+
+                            <br></br>
+                            </div>
                     );
                 })
             }

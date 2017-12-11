@@ -15,9 +15,13 @@ class VistaDirector extends Component {
   render() {
       return (
           <div className="container">
-          <GraficoBarras datos={this.state.datos.encuestas}/>
               <div className="row">
-                  <TablaResultados datos={this.state.datos}/>
+                <div className="col-lg-10">
+                    <TablaResultados datos={this.state.datos}/>
+                </div>
+                <div className="col-lg-2">
+                    <GraficoBarras datos={this.state.datos.encuestas}/>
+                </div>
               </div>
           </div>
       );

@@ -10,8 +10,14 @@ class Header extends Component {
   render() {
     return (
         <div id="header" className="col-md-8">
-            <img src={this.state.url} alt="Universidad Nacional de Quilmes" className="img-responsive" />
-            Encuesta preinscripcion
+            <div className="row">
+            <div className="col-lg-4">
+                <img src={this.state.url} alt="Universidad Nacional de Quilmes" className="img-responsive" />
+            </div>
+            <div className="col-lg-8">
+            <h1 className="display-4">Encuesta de preinscripción</h1>
+            </div>
+            </div>
         </div>
        );
 
