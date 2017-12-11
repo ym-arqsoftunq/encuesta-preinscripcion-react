@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/lib/Button';
 import MateriasAprobadas from './MateriasAprobadas';
 import Oferta from './Oferta';
 import Preinscripcion from './Preinscripcion';
 import axios from 'axios';
 import Entorno from '../Entorno';
+import { Grid,Row, Col, Button, Alert } from 'react-bootstrap';
 
 class Encuesta extends Component {
 
@@ -35,6 +35,7 @@ class Encuesta extends Component {
   handleSubmit(event) {
     event.preventDefault();
     let url = Entorno.getBackendUrl() + 'preinscribir';
+    let self = this;
     axios.post(url, {
       alumno: this.state.alumno,
       materias_aprobadas: this.state.materias_aprobadas,
@@ -44,11 +45,9 @@ class Encuesta extends Component {
       oferta: this.state.oferta
     })
       .then(function (response) {
-        alert('Preinscripcion exitosa');
+        self.setState({ mostrarMensajeSuccess: true });
       })
       .catch(function (error) {
-        alert('Preinscripcion fallida');
-        console.log(error);
       });
   }
 
@@ -157,6 +156,18 @@ class Encuesta extends Component {
 
   render() {
         return (
+            <div id="Grid">
+            <Grid>
+            <Row>
+
+            <Col xs={6} xsOffset={3}>
+                { this.state.mostrarMensajeSuccess ?
+                    <Alert bsStyle="success">
+                        La encuesta se guardó con éxito
+                    </Alert> : null }
+            </Col>
+            </Row>
+            </Grid>
         <form onSubmit={this.handleSubmit} className="form-group">
           <div className="row">
                 <MateriasAprobadas  materias={this.state.materias_aprobadas}
@@ -172,6 +183,7 @@ class Encuesta extends Component {
          </div>
          <Button type='submit' bsStyle="primary" bsSize="large"> Confirmar </Button>
        </form>
+       </div>
         );
   }
 }

@@ -3,7 +3,7 @@ import Header from './Header';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
-import { Grid,Row, Panel, Form,FormGroup, Col,FormControl, Button } from 'react-bootstrap';
+import { Grid,Row, Panel, Form,FormGroup, Col,FormControl, Button, Alert } from 'react-bootstrap';
 import Entorno from '../Entorno';
 
 class Login extends Component {
@@ -77,11 +77,8 @@ class Login extends Component {
                                 if(response.data.success){
                                     self.props.login(self.state.email,response.data.rol);
                                 }else{
-                                    alert('Error al loguearse en el backend');
+                                    self.setState({ mostrarMensajeError: true });
                                 }
-                            }).catch(function(error){
-                                alert('Error al loguearse. Ver log de consola.');
-                                console.log(error);
                             });
     }
 
@@ -93,7 +90,7 @@ class Login extends Component {
     }
 
   render()
-  {    
+  {
     const responseGoogleLoginOnFailure = (response) => {
         console.log(response);
     };
@@ -104,6 +101,13 @@ class Login extends Component {
             <Header />
             <Grid>
             <Row>
+
+            <Col xs={6} xsOffset={3}>
+                { this.state.mostrarMensajeError ?
+                    <Alert bsStyle="danger">
+                        La contraseña es incorrecta
+                    </Alert> : null }
+            </Col>
             <Col xs={6} xsOffset={3}>
             <Panel header="Ingresar">
                 <Form horizontal onSubmit={this.handleLoginSubmit}>
@@ -152,7 +156,7 @@ class Login extends Component {
                     </Col>
                     </Row>
                     </Grid>
-                </Panel>    
+                </Panel>
             </Panel>
             </Col>
             </Row>
