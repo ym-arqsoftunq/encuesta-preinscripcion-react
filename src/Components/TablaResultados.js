@@ -128,6 +128,13 @@ class TablaResultados extends Component {
         <ReactTable
           data={data}
           filterable={true}
+          previousText={'Anterior'}
+          nextText={'Siguiente'}
+          loadingText={'Cargando...'}
+          noDataText={'No se encontraron datos'}
+          pageText={'Página'}
+          ofText={'de'}
+          rowsText={'filas'}
           columns={[
                 {
                   Header: "Materia",
